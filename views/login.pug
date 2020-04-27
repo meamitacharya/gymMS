@@ -4,19 +4,22 @@ block content
 
     .container
         article.card-body.mx-auto(style='max-width: 400px;')
+
             h4.card-title.mt-3.text-center Create Account
 
-            form(action= '/' method = 'POST')
+            form.login-form
                 .form-group.input-group
                     .input-group-prepend
                         span.input-group-text
                             i.fa.fa-envelope
-                    input.form-control(name='email' placeholder='Email address' type='email')
+                    input.form-control(name='email' id='email' placeholder='Email address' type='email')
                 .form-group.input-group
                     .input-group-prepend
                         span.input-group-text
                             i.fa.fa-lock
-                    input.form-control(name='password' placeholder='Password' type='password')
+                    input.form-control(name='password' id='password' placeholder='Password' type='password')
                 .form-group
                     button.btn.btn-dark.btn-block.btn-lg(type='submit')
                         | Get Inside
+
+        script(src='/js/login.js')
