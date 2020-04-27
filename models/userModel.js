@@ -4,7 +4,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  name: {
+  fullName: {
     type: String,
     required: [true, 'Please provide your name'],
     trim: true
@@ -16,13 +16,24 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
+  address: {
+    type: String,
+    required: [true, 'Please provide your address']
+  },
+  phoneNumber: {
+    type: String,
+    required: [true, 'Please provide your phone Number']
+  },
+  vatNumber: {
+    type: String
+  },
   photo: {
     type: String
   },
   role: {
     type: String,
-    enum: ['admin', 'lead-guide', 'guide', 'user'],
-    default: 'user'
+    enum: ['admin', 'member', 'gym-owner'],
+    default: 'member'
   },
   password: {
     type: String,
@@ -49,6 +60,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     select: false
+  }
+});
+
+userSchema.pre('save', function() {
+  if (this.vatNumber) {
+    this.role = 'gym-owner';
+  } else {
+    this.vatNumber = undefined;
   }
 });
 

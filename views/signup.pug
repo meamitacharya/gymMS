@@ -1,0 +1,88 @@
+extends index
+
+block content
+
+    .container
+        article.card-body.mx-auto(style='max-width: 400px;')
+            h4.card-title.mt-3.text-center Create Account
+
+            form.signup-form
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-user
+                    input.form-control(name='fullName' id='fullName' placeholder='Full name' type='text')
+                // form-group//
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-envelope
+                    input.form-control(name='email' id='email' placeholder='Email address' type='email')
+                // form-group//
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-phone
+                    input.form-control(name='phoneNumber' id='phoneNumber' placeholder='Phone Number' type='text')
+                // form-group//
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-address-book
+                    input.form-control(name='address' id='address' placeholder='Address' type='text')
+                // form-group end.//
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-lock
+                    input.form-control(name='password' id='password' placeholder='Create password' type='password')
+                // form-group//
+                .form-group.input-group
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-lock
+                    input.form-control(name='passwordConfirm' id ='passwordConfirm' placeholder='Repeat password' type='password')
+                // form-group//
+                .form-row.p-t-20
+                    label.label.label--block(style='margin-right: 15px; padding-left:10px; ') User Type
+                    #userType.p-t-15
+                        label.radio-container.m-r-55(onclick="showHidePan('member')")
+                            | Member 
+                            input(type='radio' checked='checked' name='userType' id='member')
+                            span.checkmark
+                            |  
+                        label.radio-container(onclick="showHidePan('gymOwner')" style="padding-left:5px; ")
+                            |   Gym Owner 
+                            input(type='radio' name='userType' id='gymOwner')
+                            span.checkmark
+                            |  
+                // form-group//
+                #panNumber.form-group.input-group(style='display:none')
+                    .input-group-prepend
+                        span.input-group-text
+                            i.fa.fa-id-card
+                    input.form-control(name='vatNumber' id='vatNumber' placeholder='PAN/VAT no' type='text')
+                // form-group//
+                .form-group
+                    button.btn.btn-dark.btn-block.btn-lg
+                        | Create Account
+                // form-group//
+                p.text-center
+                    | Have an account? 
+                    a(href='/login') Log In
+        // card.//
+        // container end.//
+        br
+        br
+
+        script(src='/js/signup.js')
+        script.
+            function showHidePan(userType) {
+            if (userType === 'member') {
+            document.getElementById('panNumber').style.display = 'none';
+            } else if (userType === 'gymOwner') {
+            document.getElementById('panNumber').style.display = 'flex';
+            }
+            }
+
+

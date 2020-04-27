@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>
+      GMS | Signup Page
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+      function showHidePan(userType) {
+        if (userType === 'member') {
+          document.getElementById('panNumber').style.display = 'none';
+        } else if (userType === 'gymOwner') {
+          document.getElementById('panNumber').style.display = 'flex';
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <article class="card-body mx-auto" style="max-width: 400px;">
+        <h4 class="card-title mt-3 text-center">Create Account</h4>
+        <p class="text-center">Get started with your free account</p>
+
+        <form action="/" method="POST">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-user"></i>
+              </span>
+            </div>
+            <input
+              name="fullName"
+              class="form-control"
+              placeholder="Full name"
+              type="text"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-envelope"></i>
+              </span>
+            </div>
+            <input
+              name="email"
+              class="form-control"
+              placeholder="Email address"
+              type="email"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-phone"></i>
+              </span>
+            </div>
+            <input
+              name="phoneNumber"
+              class="form-control"
+              placeholder="Phone Number"
+              type="text"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-address-book"></i>
+              </span>
+            </div>
+            <input
+              name="address"
+              class="form-control"
+              placeholder="Address"
+              type="text"
+            />
+          </div>
+          <!-- form-group end.// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-lock"></i>
+              </span>
+            </div>
+            <input
+              name="password"
+              class="form-control"
+              placeholder="Create password"
+              type="password"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-lock"></i>
+              </span>
+            </div>
+            <input
+              name="passwordConfirm"
+              class="form-control"
+              placeholder="Repeat password"
+              type="password"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-row p-t-20">
+            <label class="label label--block" style="margin-right: 20px;"
+              >User Type</label
+            >
+            <div class="p-t-15" id="userType">
+              <label
+                class="radio-container m-r-55"
+                onclick="showHidePan('member')"
+                >Member
+                <input type="radio" checked="checked" name="userType" />
+                <span class="checkmark"></span>
+              </label>
+              <label class="radio-container" onclick="showHidePan('gymOwner')"
+                >Gym Owner
+                <input type="radio" name="userType" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <!-- form-group// -->
+
+          <div
+            class="form-group input-group"
+            id="panNumber"
+            style="display:none"
+          >
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-id-card "></i>
+              </span>
+            </div>
+            <input
+              name="panNumber"
+              class="form-control"
+              placeholder="PAN/VAT no"
+              type="text"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Create Account
+            </button>
+          </div>
+          <!-- form-group// -->
+          <p class="text-center">
+            Have an account? <a href="/signup">Log In</a>
+          </p>
+        </form>
+      </article>
+
+      <!-- card.// -->
+    </div>
+    <!--container end.//-->
+
+    <br /><br />
+  </body>
+</html>
