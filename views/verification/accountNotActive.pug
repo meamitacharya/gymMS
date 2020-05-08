@@ -1,0 +1,13 @@
+extends ../base
+
+block topBar
+    include ../widgets/_topBarNotLogin
+
+    block MainContent
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-body.my-3
+                    | Your Account has not been activated yet. Contact Our support for further assistance..
+                .modal-footer
+                    //- button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    a.button.btn.btn-primary(type='button' href='/') Go to Home

@@ -48,6 +48,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
 
+  // res.clearCookie('jwt');
   res.status(200).json({
     status: 'sucess',
     results: users.length,

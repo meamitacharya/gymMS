@@ -1,0 +1,60 @@
+nav#page-top.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
+  a.sidebar-brand.d-flex.align-items-center.justify-content-center(href='/')
+    .sidebar-brand-icon.rotate-n-15
+      i.fas.fa-dumbbell.fa-3x
+    .sidebar-brand-text.mx-3.h3 Gymaholic
+  a.navbar-brand(href='#') Navbar
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNavDropdown.collapse.navbar-collapse
+    ul.navbar-nav
+      li.nav-item.active
+        a.nav-link(href='#')
+          | Home 
+          span.sr-only (current)
+      li.nav-item
+        a.nav-link(href='#') Features
+      li.nav-item
+        a.nav-link(href='#') Pricing
+      li.nav-item.dropdown
+        a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          | Dropdown link
+        .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+          a.dropdown-item(href='#') Action
+
+  // Topbar Navbar
+  ul.navbar-nav.ml-auto
+    // Nav Item - Search Dropdown (Visible Only XS)
+    li.nav-item.dropdown.no-arrow.d-sm-none
+      a#searchDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+        i.fas.fa-search.fa-fw
+      // Dropdown - Messages
+      .dropdown-menu.dropdown-menu-right.p-3.shadow.animated--grow-in(aria-labelledby='searchDropdown')
+        form.form-inline.mr-auto.w-100.navbar-search
+          .input-group
+            input.form-control.bg-light.border-0.small(type='text' placeholder='Search for...' aria-label='Search' aria-describedby='basic-addon2')
+            .input-group-append
+              button.btn.btn-primary(type='button')
+                i.fas.fa-search.fa-sm
+    // Nav Item - Messages
+    // Nav Item - User Information
+    if user
+      li.nav-item.dropdown.no-arrow
+        a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          span.mr-2.d-none.d-lg-inline.text-gray-600.small= user.firstName + ' ' + user.lastName
+          img.img-profile.rounded-circle(src='https://source.unsplash.com/bSpqe48INMg/60x60')
+        // Dropdown - User Information
+        .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
+          a.dropdown-item(href='#')
+            i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+            |                   Profile
+          a.dropdown-item(href='#' data-toggle='modal' data-target='#logoutModal')
+            i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+            |                   Logout
+    else
+      li
+        a.btn.btn-light.btn-outline-primary.font-weight-bold.mx-3(href='/login') Sign In
+      li
+        a.btn.btn-light.btn-outline-primary.font-weight-bold(href='/signup') Sign Up
+
+

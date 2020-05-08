@@ -1,88 +1,71 @@
-extends index
+extends base
 
-block content
+block topBar
+    include widgets/_topBar
 
-    .container
-        article.card-body.mx-auto(style='max-width: 400px;')
-            h4.card-title.mt-3.text-center Create Account
+    block MainContent
+        .container
+            .card.o-hidden.border-0.shadow-lg.my-4
+                .card-body.p-0
+                    // Nested Row within Card Body
+                    .row
+                        .col-lg-5.d-none.d-lg-block.bg-register-image
+                        .col-lg-7
+                            .p-5
+                                .text-center
+                                    h1.h4.text-gray-900.mb-4 Create an Account!
+                                form.user.signup-form
+                                    .form-group.row
+                                        .col-sm-6.mb-3.mb-sm-0
+                                            input#firstName.form-control.form-control-user.font-weight-bold(type='text' name='firstName' placeholder='First Name')
+                                        .col-sm-6
+                                            input#lastName.form-control.form-control-user.font-weight-bold(type='text' name='lastName' placeholder='Last Name')
+                                    .form-group.row
+                                        .col-sm-6.mb-3.mb-sm-0
+                                            input#address.form-control.form-control-user.font-weight-bold(type='text' name='address' placeholder='Address')
+                                        .col-sm-6
+                                            input#phoneNumber.form-control.form-control-user.font-weight-bold(type='text' name='phoneNumber' placeholder='Phone Number')
+                                    .form-group
+                                        input#email.form-control.form-control-user.font-weight-bold(type='email' name='email' placeholder='Email Address')
+                                    .form-group.row
+                                        .col-sm-6.mb-3.mb-sm-0
+                                            input#password.form-control.form-control-user.font-weight-bold(type='password' name='password' placeholder='Password')
+                                        .col-sm-6
+                                            input#passwordConfirm.form-control.form-control-user.font-weight-bold(type='password' name='passwordConfirm' placeholder='Repeat Password')
+                                    .form-group
+                                        span.font-weight-bold.mx-3
+                                            | User Type :
+                                        .custom-control.custom-radio.custom-control-inline
+                                            input#member.custom-control-input(type='radio' name='userType')
+                                            label.custom-control-label(for='member' onclick="showHidePan('member')") Member
+                                        .custom-control.custom-radio.custom-control-inline
+                                            input#gymOwner.custom-control-input(type='radio' name='userType')
+                                            label.custom-control-label(for='gymOwner' onclick="showHidePan('gymOwner')") Gym Owner
+                                    #panBlock.form-group(style='display: none;')
+                                        input#panVatNumber.form-control.form-control-user.font-weight-bold(type='text' name='panVatNumber' placeholder='Enter PAN/VAT Number')
+                                    button.btn.btn-primary.btn-user.btn-block(type='submit')
+                                        | Register Account
+                                    hr
+                                    //- a.btn.btn-facebook.btn-user.btn-block(href='#')
+                                    //-     i.fab.fa-facebook-f.fa-fw
+                                    //-     |  Register with
+                                    //-     |                     Facebook
+                                hr
+                                .text-center
+                                    a.small(href='/login') Already have an account? Login!
 
-            form.signup-form
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-user
-                    input.form-control(name='fullName' id='fullName' placeholder='Full name' type='text')
-                // form-group//
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-envelope
-                    input.form-control(name='email' id='email' placeholder='Email address' type='email')
-                // form-group//
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-phone
-                    input.form-control(name='phoneNumber' id='phoneNumber' placeholder='Phone Number' type='text')
-                // form-group//
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-address-book
-                    input.form-control(name='address' id='address' placeholder='Address' type='text')
-                // form-group end.//
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-lock
-                    input.form-control(name='password' id='password' placeholder='Create password' type='password')
-                // form-group//
-                .form-group.input-group
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-lock
-                    input.form-control(name='passwordConfirm' id ='passwordConfirm' placeholder='Repeat password' type='password')
-                // form-group//
-                .form-row.p-t-20
-                    label.label.label--block(style='margin-right: 15px; padding-left:10px; ') User Type
-                    #userType.p-t-15
-                        label.radio-container.m-r-55(onclick="showHidePan('member')")
-                            | Member 
-                            input(type='radio' checked='checked' name='userType' id='member')
-                            span.checkmark
-                            |  
-                        label.radio-container(onclick="showHidePan('gymOwner')" style="padding-left:5px; ")
-                            |   Gym Owner 
-                            input(type='radio' name='userType' id='gymOwner')
-                            span.checkmark
-                            |  
-                // form-group//
-                #panNumber.form-group.input-group(style='display:none')
-                    .input-group-prepend
-                        span.input-group-text
-                            i.fa.fa-id-card
-                    input.form-control(name='vatNumber' id='vatNumber' placeholder='PAN/VAT no' type='text')
-                // form-group//
-                .form-group
-                    button.btn.btn-dark.btn-block.btn-lg
-                        | Create Account
-                // form-group//
-                p.text-center
-                    | Have an account? 
-                    a(href='/login') Log In
-        // card.//
-        // container end.//
-        br
-        br
+    block footer
+        include widgets/_footer
 
-        script(src='/js/signup.js')
-        script.
-            function showHidePan(userType) {
-            if (userType === 'member') {
-            document.getElementById('panNumber').style.display = 'none';
-            } else if (userType === 'gymOwner') {
-            document.getElementById('panNumber').style.display = 'flex';
-            }
-            }
+    script(type ='module' src='/js/signup.js')
+    //- script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+    script.
+        function showHidePan(userType) {
+        if (userType === "member") {
+        document.getElementById("panBlock").style.display = "none";
+        } else if (userType === "gymOwner") {
+        document.getElementById("panBlock").style.display = "block";
+        }
+        }
 
 

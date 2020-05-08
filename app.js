@@ -5,13 +5,15 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 //Initialising express app
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
+const { activate } = require('./controller/authController');
 const userRouter = require('./routes/userRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -23,9 +25,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
-
-//For sending data from frontend to backend
-app.use(cors());
 
 //Set security HTTP headers
 app.use(helmet());
@@ -45,6 +44,7 @@ app.use('/api/', limiter);
 
 //Body parser, reading data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -54,18 +54,20 @@ app.use(xss());
 
 //Routes
 
-// Views Routes
-app.get('/', (req, res) => {
-  res.status(200).render('index');
-});
-app.get('/signup', (req, res) => {
-  res.status(200).render('signup');
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Acess-Control-Allow-Headers',
+    'Origin',
+    'X-Requested-With',
+    'Accept',
+    'Authorization'
+  );
+  next();
 });
 
-app.get('/login', (req, res) => {
-  res.status(200).render('login');
-});
-
+app.use('/', viewRouter);
+app.get('/activate/:token', activate);
 app.use('/api/v1/users', userRouter);
 
 //Handling unhandled routes

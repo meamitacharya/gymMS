@@ -1,3 +1,5 @@
+import { showAlert } from './alert.js';
+
 document.querySelector('.login-form').addEventListener('submit', e => {
   e.preventDefault();
 
@@ -11,7 +13,7 @@ const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/v1/users/login',
+      url: 'http://localhost:8085/api/v1/users/login',
       data: {
         email,
         password
@@ -19,13 +21,15 @@ const login = async (email, password) => {
     });
 
     if (res.data.status === 'sucess') {
+      showAlert('success', 'Logged In Sucessfully');
       window.setTimeout(() => {
-        location.assign('/');
-      }, 1500);
+        location.assign('/gymadmin');
+      }, 3000);
     } else {
-      location.assign('/login');
+      location.assign('/accountNotActivated');
     }
   } catch (err) {
-    console.log(err.response.data.message);
+    showAlert('danger', err.response.data.message);
+    // console.log(err.response.data.message);
   }
 };

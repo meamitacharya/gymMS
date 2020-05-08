@@ -1,58 +1,64 @@
+import { showAlert } from './alert.js';
+
 document.querySelector('.signup-form').addEventListener('submit', e => {
   e.preventDefault();
 
-  const fullName = document.getElementById('fullName').value;
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
   const email = document.getElementById('email').value;
   const phoneNumber = document.getElementById('phoneNumber').value;
   const address = document.getElementById('address').value;
   const password = document.getElementById('password').value;
   const passwordConfirm = document.getElementById('passwordConfirm').value;
-  const vatNumber = document.getElementById('vatNumber').value;
+  const panVatNumber = document.getElementById('panVatNumber').value;
 
-  console.log(vatNumber);
   signup(
-    fullName,
+    firstName,
+    lastName,
     email,
     phoneNumber,
     address,
     password,
     passwordConfirm,
-    vatNumber
+    panVatNumber
   );
 });
 
 const signup = async (
-  fullName,
+  firstName,
+  lastName,
   email,
   phoneNumber,
   address,
   password,
   passwordConfirm,
-  vatNumber
+  panVatNumber
 ) => {
   try {
     const res = await axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/v1/users/signup',
+      url: 'http://localhost:8085/api/v1/users/signup',
       data: {
-        fullName: fullName,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
         address: address,
         password: password,
         passwordConfirm: passwordConfirm,
-        vatNumber: vatNumber
+        panVatNumber: panVatNumber
       }
     });
-    console.log(res);
+
     if (res.data.status === 'sucess') {
+      showAlert('success', 'Account created successfully');
       window.setTimeout(() => {
-        location.assign('/');
-      }, 1500);
+        location.assign('/verification');
+      }, 3000);
     } else {
       location.assign('/signup');
     }
   } catch (err) {
-    console.log(err.response.data.message);
+    showAlert('danger', err.response.data.message);
   }
 };

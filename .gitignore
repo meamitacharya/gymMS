@@ -3,3 +3,4 @@ config.env
 information.txt
 .eslintignore
 .eslintrc.json
+theme/

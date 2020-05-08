@@ -1,0 +1,18 @@
+extends ../base
+
+block topBar
+    include ../widgets/_topBarNotLogin
+
+    block MainContent
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-body.my-3
+                    | An email has been sent with verfication details. check your email once.
+                .modal-footer
+                    //- button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    a.button.btn.btn-primary(type='button' href='/') Go to Home
+
+
+
+
+

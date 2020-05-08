@@ -4,9 +4,14 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  fullName: {
+  firstName: {
     type: String,
-    required: [true, 'Please provide your name'],
+    required: [true, 'Please provide your  First name'],
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Please provide your last name'],
     trim: true
   },
   email: {
@@ -24,7 +29,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide your phone Number']
   },
-  vatNumber: {
+  panVatNumber: {
     type: String
   },
   photo: {
@@ -54,20 +59,27 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not same'
     }
   },
-  passwordResetToken: String,
+  passwordResetToken: Number,
   passwordResetExpires: Date,
   active: {
     type: Boolean,
     default: true,
     select: false
-  }
+  },
+  isConfirmed: {
+    type: Boolean,
+    default: false
+    // select: false
+  },
+  emailVerificationToken: String,
+  emailverficationExpires: Date
 });
 
 userSchema.pre('save', function() {
-  if (this.vatNumber) {
+  if (this.panVatNumber) {
     this.role = 'gym-owner';
   } else {
-    this.vatNumber = undefined;
+    this.panVatNumber = undefined;
   }
 });
 
@@ -116,18 +128,17 @@ userSchema.methods.changedPasswordAfter = function(JWTTimpestamp) {
   return false;
 };
 
-userSchema.methods.createPasswordResetToken = function() {
-  const resetToken = crypto.randomBytes(32).toString('hex');
+userSchema.methods.createVerificationToken = function() {
+  const emailVerificationToken = crypto.randomBytes(32).toString('hex');
 
-  this.passwordResetToken = crypto
+  this.emailVerificationToken = crypto
     .createHash('sha256')
-    .update(resetToken)
+    .update(emailVerificationToken)
     .digest('hex');
 
-  console.log({ resetToken }, this.passwordResetToken);
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  this.emailverficationExpires = Date.now() + 10 * 60 * 1000;
 
-  return resetToken;
+  return emailVerificationToken;
 };
 
 const User = mongoose.model('User', userSchema);
