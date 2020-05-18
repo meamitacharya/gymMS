@@ -50,3 +50,7 @@ exports.getResetPassword = (req, res) => {
     title: 'Gymaholic  | Reset Password'
   });
 };
+
+exports.getErrorPage = (req, res) => {
+  res.status(200).render('error');
+};

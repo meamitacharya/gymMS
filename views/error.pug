@@ -1,0 +1,13 @@
+extends base
+
+block topBar   
+    include widgets/_topBarNotLogin
+
+    block MainContent
+        .container-fluid
+            .text-center
+                .error.mx-auto(data-text='404') 404
+                p.lead.text-gray-800.mb-5 Page Not Found 
+                    i.fas.fa-exclamation(style='color:red')
+                h4.text-gray-500.mb-0=msg
+                a(href='/') &larr; Back to Homepage

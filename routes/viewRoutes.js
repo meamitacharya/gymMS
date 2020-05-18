@@ -8,7 +8,8 @@ const {
   getNotActive,
   getAccountActive,
   getForgotPassword,
-  getResetPassword
+  getResetPassword,
+  getErrorPage
 } = require('../controller/viewsController');
 const { isLoggedIn, protect } = require('../controller/authController');
 
@@ -25,5 +26,6 @@ router.get('/accountNotActivated', getNotActive);
 router.get('/accountActive', getAccountActive);
 router.get('/forgotPassword', getForgotPassword);
 router.get('/resetPassword', getResetPassword);
+router.get('/error', getErrorPage);
 
 module.exports = router;

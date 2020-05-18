@@ -20,7 +20,7 @@ const sendCookie = (token, res) => {
     httpOnly: true
   };
 
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = false;
   res.cookie('jwt', token, cookieOptions);
 };
 
@@ -171,7 +171,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   if (!token) {
     return next(
-      new AppError('You are not logged in.Please login to get Acess', 401)
+      new AppError('You are not logged in. Please login to get Access', 401)
     );
   }
   // 2)Verification Token
