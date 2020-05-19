@@ -6,33 +6,18 @@ document.querySelector('.signup-form').addEventListener('submit', e => {
   const firstName = document.getElementById('firstName').value;
   const lastName = document.getElementById('lastName').value;
   const email = document.getElementById('email').value;
-  const phoneNumber = document.getElementById('phoneNumber').value;
-  const address = document.getElementById('address').value;
   const password = document.getElementById('password').value;
   const passwordConfirm = document.getElementById('passwordConfirm').value;
-  const panVatNumber = document.getElementById('panVatNumber').value;
 
-  signup(
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    address,
-    password,
-    passwordConfirm,
-    panVatNumber
-  );
+  signup(firstName, lastName, email, password, passwordConfirm);
 });
 
 const signup = async (
   firstName,
   lastName,
   email,
-  phoneNumber,
-  address,
   password,
-  passwordConfirm,
-  panVatNumber
+  passwordConfirm
 ) => {
   try {
     const res = await axios({
@@ -42,11 +27,8 @@ const signup = async (
         firstName: firstName,
         lastName: lastName,
         email: email,
-        phoneNumber: phoneNumber,
-        address: address,
         password: password,
-        passwordConfirm: passwordConfirm,
-        panVatNumber: panVatNumber
+        passwordConfirm: passwordConfirm
       }
     });
 

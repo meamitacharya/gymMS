@@ -20,11 +20,6 @@ block topBar
                                             input#firstName.form-control.form-control-user.font-weight-bold(type='text' name='firstName' placeholder='First Name')
                                         .col-sm-6
                                             input#lastName.form-control.form-control-user.font-weight-bold(type='text' name='lastName' placeholder='Last Name')
-                                    .form-group.row
-                                        .col-sm-6.mb-3.mb-sm-0
-                                            input#address.form-control.form-control-user.font-weight-bold(type='text' name='address' placeholder='Address')
-                                        .col-sm-6
-                                            input#phoneNumber.form-control.form-control-user.font-weight-bold(type='text' name='phoneNumber' placeholder='Phone Number')
                                     .form-group
                                         input#email.form-control.form-control-user.font-weight-bold(type='email' name='email' placeholder='Email Address')
                                     .form-group.row
@@ -32,24 +27,13 @@ block topBar
                                             input#password.form-control.form-control-user.font-weight-bold(type='password' name='password' placeholder='Password')
                                         .col-sm-6
                                             input#passwordConfirm.form-control.form-control-user.font-weight-bold(type='password' name='passwordConfirm' placeholder='Repeat Password')
-                                    .form-group
-                                        span.font-weight-bold.mx-3
-                                            | User Type :
-                                        .custom-control.custom-radio.custom-control-inline
-                                            input#member.custom-control-input(type='radio' name='userType')
-                                            label.custom-control-label(for='member' onclick="showHidePan('member')") Member
-                                        .custom-control.custom-radio.custom-control-inline
-                                            input#gymOwner.custom-control-input(type='radio' name='userType')
-                                            label.custom-control-label(for='gymOwner' onclick="showHidePan('gymOwner')") Gym Owner
-                                    #panBlock.form-group(style='display: none;')
-                                        input#panVatNumber.form-control.form-control-user.font-weight-bold(type='text' name='panVatNumber' placeholder='Enter PAN/VAT Number')
                                     button.btn.btn-primary.btn-user.btn-block(type='submit')
                                         | Register Account
                                     hr
-                                    //- a.btn.btn-facebook.btn-user.btn-block(href='#')
-                                    //-     i.fab.fa-facebook-f.fa-fw
-                                    //-     |  Register with
-                                    //-     |                     Facebook
+                                    a.btn.btn-facebook.btn-user.btn-block(href='#')
+                                        i.fab.fa-facebook-f.fa-fw
+                                        |  Register with
+                                        |                     Facebook
                                 hr
                                 .text-center
                                     a.small(href='/login') Already have an account? Login!

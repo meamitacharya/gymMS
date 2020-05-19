@@ -22,12 +22,10 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, 'Please provide a valid email']
   },
   address: {
-    type: String,
-    required: [true, 'Please provide your address']
+    type: String
   },
   phoneNumber: {
-    type: String,
-    required: [true, 'Please provide your phone Number']
+    type: String
   },
   panVatNumber: {
     type: String
@@ -37,8 +35,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'member', 'gym-owner'],
-    default: 'member'
+    enum: ['admin', 'member', 'gym-owner']
   },
   password: {
     type: String,
@@ -75,13 +72,13 @@ const userSchema = new mongoose.Schema({
   emailverficationExpires: Date
 });
 
-userSchema.pre('save', function() {
-  if (this.panVatNumber) {
-    this.role = 'gym-owner';
-  } else {
-    this.panVatNumber = undefined;
-  }
-});
+// userSchema.pre('save', function() {
+//   if (this.panVatNumber) {
+//     this.role = 'gym-owner';
+//   } else {
+//     this.panVatNumber = undefined;
+//   }
+// });
 
 userSchema.pre('save', async function(next) {
   //Only run this function if password is modified
