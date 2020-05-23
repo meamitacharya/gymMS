@@ -50,3 +50,9 @@ exports.getResetPassword = (req, res) => {
     title: 'Gymaholic  | Reset Password'
   });
 };
+
+exports.getProfile = (req, res) => {
+  res.status(200).render('profile', {
+    title: ' Gymaholic | Profile '
+  });
+};

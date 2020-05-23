@@ -22,12 +22,12 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
 
   //2) Filtered out unwanted fileds that are not a;llowed to update
-  const filteredBody = filterObj(req.body, 'name', 'email');
+  const filteredBody = filterObj(req.body, 'phoneNumber', 'address');
 
   //3) Update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
-    new: true,
-    runValidators: true
+    new: true
+    // runValidators: true
   });
 
   res.status(200).json({

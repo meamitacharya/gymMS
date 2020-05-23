@@ -194,6 +194,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   //Contains currentUser Object
   req.user = currentUser;
+  res.locals.user = currentUser; // To pass varibales to template
   next();
 });
 
