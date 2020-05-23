@@ -51,6 +51,8 @@ exports.getResetPassword = (req, res) => {
   });
 };
 
-exports.getErrorPage = (req, res) => {
-  res.status(200).render('error');
+exports.getProfile = (req, res) => {
+  res.status(200).render('profile', {
+    title: ' Gymaholic | Profile '
+  });
 };

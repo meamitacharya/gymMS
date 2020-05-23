@@ -9,23 +9,21 @@ const {
   getAccountActive,
   getForgotPassword,
   getResetPassword,
-  getErrorPage
+  getProfile
 } = require('../controller/viewsController');
 const { isLoggedIn, protect } = require('../controller/authController');
 
 const router = express.Router();
 
-router.use(isLoggedIn);
-
-router.get('/', getHomePage);
+router.get('/', isLoggedIn, getHomePage);
 router.get('/gymadmin', protect, getGymAdminDashboard);
-router.get('/login', getLogin);
-router.get('/signup', getSignUp);
-router.get('/verification', getSignupVerification);
-router.get('/accountNotActivated', getNotActive);
-router.get('/accountActive', getAccountActive);
-router.get('/forgotPassword', getForgotPassword);
-router.get('/resetPassword', getResetPassword);
-router.get('/error', getErrorPage);
+router.get('/login', isLoggedIn, getLogin);
+router.get('/signup', isLoggedIn, getSignUp);
+router.get('/verification', isLoggedIn, getSignupVerification);
+router.get('/accountNotActivated', isLoggedIn, getNotActive);
+router.get('/accountActive', isLoggedIn, getAccountActive);
+router.get('/forgotPassword', isLoggedIn, getForgotPassword);
+router.get('/resetPassword', isLoggedIn, getResetPassword);
+router.get('/profile', protect, getProfile);
 
 module.exports = router;
