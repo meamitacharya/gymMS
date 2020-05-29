@@ -31,11 +31,13 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   photo: {
-    type: String
+    type: String,
+    default: 'default.jpeg'
   },
   role: {
     type: String,
-    enum: ['admin', 'member', 'gym-owner']
+    enum: ['admin', 'member', 'gym-owner'],
+    default: 'member'
   },
   password: {
     type: String,
@@ -72,11 +74,12 @@ const userSchema = new mongoose.Schema({
   emailverficationExpires: Date
 });
 
-// userSchema.pre('save', function() {
-//   if (this.panVatNumber) {
-//     this.role = 'gym-owner';
-//   } else {
+// userSchema.post('save', function() {
+//   if (this.panVatNumber === '') {
 //     this.panVatNumber = undefined;
+//     this.role = 'member';
+//   } else {
+//     this.role = 'gym-owner';
 //   }
 // });
 

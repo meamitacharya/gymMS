@@ -27,7 +27,18 @@ block TopBar
                                             input#password.form-control.form-control-user.font-weight-bold(type='password' name='password' placeholder='Password')
                                         .col-sm-6
                                             input#passwordConfirm.form-control.form-control-user.font-weight-bold(type='password' name='passwordConfirm' placeholder='Repeat Password')
-                                    button.btn.btn-primary.btn-user.btn-block(type='submit')
+
+                                    .form-group.radioButton
+                                        span.font-weight-bold.mx-3
+                                            | User Type :
+                                        .custom-control.custom-radio.custom-control-inline
+                                            input#member.custom-control-input(type='radio' name='userType' value='member' checked)
+                                            label.custom-control-label(for='member' ) Member
+                                        .custom-control.custom-radio.custom-control-inline
+                                            input#gymOwner.custom-control-input(type='radio' name='userType' value='gym-owner')
+                                            label.custom-control-label(for='gymOwner' ) Gym Owner
+
+                                    button.btn.btn-primary.btn-user.btn-block.signup-button(type='submit')
                                         | Register Account
                                     hr
                                     a.btn.btn-facebook.btn-user.btn-block(href='#')
@@ -42,14 +53,7 @@ block TopBar
         include widgets/_footer
 
     script(type ='module' src='/js/signup.js')
-    //- script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
-    script.
-        function showHidePan(userType) {
-        if (userType === "member") {
-        document.getElementById("panBlock").style.display = "none";
-        } else if (userType === "gymOwner") {
-        document.getElementById("panBlock").style.display = "block";
-        }
-        }
+
+
 
 

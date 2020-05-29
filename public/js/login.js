@@ -1,12 +1,15 @@
 import { showAlert } from './alert.js';
 
-document.querySelector('.login-form').addEventListener('submit', e => {
+document.querySelector('.login-form').addEventListener('submit', async e => {
   e.preventDefault();
 
+  document.querySelector('.login-button').textContent = 'Logging in ....';
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  login(email, password);
+  await login(email, password);
+
+  document.querySelector('.login-button').textContent = 'Login';
 });
 
 const login = async (email, password) => {
@@ -24,7 +27,7 @@ const login = async (email, password) => {
       showAlert('success', 'Logged In Sucessfully');
       window.setTimeout(() => {
         location.assign('/gymadmin');
-      }, 3000);
+      }, 1500);
     } else {
       location.assign('/accountNotActivated');
     }

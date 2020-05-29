@@ -1,37 +1,38 @@
 import { showAlert } from './alert.js';
 
-const el = document.querySelector('.profile-form');
+const profileForm = document.querySelector('.profile-form');
 
-if (el) {
-  el.addEventListener('submit', e => {
+if (profileForm) {
+  profileForm.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const phoneNumber = document.getElementById('phoneNumber').value;
-    const address = document.getElementById('address').value;
+    document.querySelector('.update-button').textContent = 'Updating ...';
+    const form = new FormData();
+    form.append('phoneNumber', document.getElementById('phoneNumber').value);
+    form.append('address', document.getElementById('address').value);
+    form.append('panVatNumber', document.getElementById('panVatNumber').value);
+    form.append('photo', document.getElementById('photo').files[0]);
 
-    console.log(phoneNumber);
-    // updateProfile(phoneNumber, address);
+    await updateProfile(form);
   });
 }
 
-const updateProfile = async (phoneNumber, address) => {
-  console.log('clicked');
+const updateProfile = async data => {
   try {
+    console.log(data);
     const res = await axios({
-      method: 'PATCH',
+      method: 'patch',
       url: 'http://localhost:8085/api/v1/users/updateMe',
-      data: {
-        phoneNumber,
-        address
-      }
+      data
     });
+
     if (res.data.status === 'sucess') {
       showAlert('success', 'Profile updated Sucessfully');
       window.setTimeout(() => {
         location.assign('/profile');
-      }, 3000);
+      }, 1000);
     } else {
-      location.assign('/profile');
+      location.assign('/');
     }
   } catch (err) {
     showAlert('danger', err.response.data.message);

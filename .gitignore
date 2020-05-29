@@ -4,3 +4,4 @@ information.txt
 .eslintignore
 .eslintrc.json
 theme/
+public/img

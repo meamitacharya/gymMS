@@ -4,7 +4,10 @@ const logout = async () => {
       method: 'GET',
       url: 'http://localhost:8085/api/v1/users/logout'
     });
-    if (res.data.status === 'sucess') location.reload(true);
+    if (res.data.status === 'sucess') {
+      location.reload(true);
+      location.assign('/');
+    }
   } catch (err) {
     alert('Error logging out');
   }

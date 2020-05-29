@@ -10,10 +10,10 @@ block TopBar
             .row
                 .col-xl-8.col-lg-7
                     .card.shadow.mb-4
-                        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+                        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(style='background-color:#f1f1f1')
                             h6.m-0.font-weight-bold.text-primary My Profile
                         .card-body
-                            form.profile-form
+                            form.profile-form(enctype='multipart/form-data')
                                 .form-group.row
                                     label.col-sm-2.col-form-label(for='full_name') Full Name
                                     .col-sm-10
@@ -40,39 +40,43 @@ block TopBar
 
 
                                 fieldset.form-group
+                                - var check = 'checked'
+                                if user.role === 'member'
+
                                     .row
                                         legend.col-sm-2.col-form-label
                                             | User Type 
                                         .col-sm-10
-                                            - var check = 'checked'
-                                            if user.role === 'member' 
-                                                .form-check
-                                                    input#gridRadios1.form-check-input(type='radio' name='userType' onclick="showHidePan('member')" checked=`${check}`)
-                                                    label.form-check-label(for='member' )
-                                                        | Member
-                                                .form-check
-                                                    input#gridRadios2.form-check-input(type='radio' name='userType' onclick="showHidePan('gymOwner')" )
-                                                    label.form-check-label(for='gymOwner' )
-                                                        | Gym Owner
-                                            else
-                                                .form-check
-                                                    input#gridRadios1.form-check-input(type='radio' name='userType' onclick="showHidePan('member')" )
-                                                    label.form-check-label(for='member' )
-                                                        | Member
-                                                .form-check
-                                                    input#gridRadios2.form-check-input(type='radio' name='userType' onclick="showHidePan('gymOwner')" checked = `${check}`)
-                                                    label.form-check-label(for='gymOwner' )
-                                                        | Gym Owner
-                            if user.role === 'member'
-                                #panBlock.form-group.row(style='display:none;')
-                                    label.col-sm-2.col-form-label(for='pan_vat_number') PAN-VAT Number
-                                    .col-sm-10
-                                        input.form-control(type='text' name='panVatNumber' id='panVatNumber' )
-                            else 
-                                #panBlock.form-group.row
-                                    label.col-sm-2.col-form-label(for='pan_vat_number') PAN-VAT Number
-                                    .col-sm-10
-                                        input.form-control(type='text' name='panVatNumber' id='panVatNumber' value=`${user.panVatNumber}`)
+
+
+                                            .form-check
+                                                input#gridRadios1.form-check-input(type='radio' name='userType' onclick="showHidePan('member')" checked=`${check}`)
+                                                label.form-check-label(for='member' )
+                                                    | Member
+
+
+                                    #panBlock.form-group.row(style='display:none;')
+                                        label.col-sm-2.col-form-label(for='pan_vat_number') PAN-VAT Number
+                                        .col-sm-10
+                                            input.form-control(type='text' name='panVatNumber' id='panVatNumber' value='')
+
+
+                                else
+                                    .row
+                                        legend.col-sm-2.col-form-label
+                                            | User Type 
+                                        .col-sm-10
+
+
+                                            .form-check
+                                                input#gridRadios2.form-check-input(type='radio' name='userType' onclick="showHidePan('gymOwner')" checked = `${check}`)
+                                                label.form-check-label(for='gymOwner' )
+                                                    | Gym Owner
+
+                                    #panBlock.form-group.row
+                                        label.col-sm-2.col-form-label(for='pan_vat_number') PAN-VAT Number
+                                        .col-sm-10
+                                            input.form-control(type='text' name='panVatNumber' id='panVatNumber' value=`${user.panVatNumber}`)
 
 
                                 .form-group.row
@@ -80,30 +84,41 @@ block TopBar
                                     .col-sm-10
                                         input.form-control-plaintext(type='text' readonly='' name='status' id='status' value='Active')
 
-                                form.group
-                                    button.btn.btn-primary.btn-user.btn-block(type='submit')  Update Profile 
+                                .form-group.row
+                                    label.col-sm-2.col-form-label(for='photo') Image
+                                    .col-sm-10
+                                        input.form-control-file(type='file' id='photo' name='photo' accept='image/*')
 
+                                form.group
+                                    button.btn.btn-primary.btn-user.btn-block.update-button(type='submit')
+                                        | Update Profile
 
                 .col-xl-4.col-lg-5
                     .card.shadow.mb-4
 
-                        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-                            h6.m-0.font-weight-bold.text-primary Upload Profile Image
+                        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(style='background-color:#f1f1f1')
+                            h6.m-0.font-weight-bold.text-primary My Profile Image
 
                         .card-body
                             div(align='center')
-                                i.fas.fa-10x.fa-user-circle
-                                hr
-                                form(action='/profile/image' enctype='multipart/form-data' method='POST')
-                                    input(type='hidden' name='csrfmiddlewaretoken' value='5diWQ6C0NUUz6dbebMA8uZhnTACp2ZWzxcK1gRV2rCeLX8oBfAxvmJMtJD2fnk2O')
-                                    input#exampleFormControlFile1.form-control-file(type='file' name='image')
-                                    input(type='hidden' name='user_id' value='1')
+                                if !user.photo
+                                    //- i.fas.fa-10x.fa-user-circle
+                                    img.rounded-circle(src=`/img/users/default.jpeg`, alt='Default photo')
                                     hr
-                                    br
-                                    button.btn.btn-primary.btn-user.btn-block(type='submit')  Update Profile Image 
+                                else
+                                    img.rounded-circle(src=`/img/users/${user.photo}`, alt='User photo')
+                                    hr
+                            .text-center
+                                h5.h3
+                                    | #{user.firstName} #{user.lastName} 
+                                br
+
+
 
     block footer    
         include widgets/_footer
+
+
     script(type='module' src='/js/updateProfile.js')
     script.
         function showHidePan(userType) {
@@ -114,4 +129,6 @@ block TopBar
         }
         }
 
+block LogoutModal
+    include widgets/_logoutModal
 
