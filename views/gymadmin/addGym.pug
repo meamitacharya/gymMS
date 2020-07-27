@@ -1,0 +1,27 @@
+extends base-admin
+
+block MainContent
+    .d-sm-flex.align-items-center.justify-content-between.mb-4
+        h3.h3.mb-0.text-gray-800 Add Gym 
+    .container
+        .row
+            .col-sm-8
+                form.createGym-form
+                    .form-group
+                        label(for='name') Name
+                        input#name.form-control(type='text' name='name' maxlength='200' required='')
+                    .form-group
+                        label(for='gymLocation') Location:
+                        input#gymLocation.form-control(type='text' name='location' maxlength='200' required='')
+                    .form-group
+                        label(for='price') Average Cost:
+                        input#price.form-control(type='number' name='price' required='')
+                    .form-group
+                        label(for='summary') Summary:
+                        textarea#summary.form-control(name='summary' cols='40' rows='10')
+                    .form-group
+                        label(for='featuredPhoto') Featured photo:
+                        input#featuredPhoto.form-control-file(type='file' name='featuredPhoto' accept='image/*')
+                    input.btn.btn-primary(type='submit')
+
+    script(type='module' src='/js/gym/addGym.js')

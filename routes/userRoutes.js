@@ -16,10 +16,10 @@ const {
   createNewUser,
   patchUser,
   updateMe,
-  deleteMe,
-  uploadUserPhoto,
-  resizeUserPhoto
+  deleteMe
 } = require('../controller/userController');
+
+const { resizeUserPhoto, uploadUserPhoto } = require('../utils/uploadPhoto');
 
 const router = express.Router();
 

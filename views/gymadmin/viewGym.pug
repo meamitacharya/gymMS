@@ -1,0 +1,22 @@
+extends base-admin
+
+block MainContent   
+    .d-sm-flex.align-items-center.justify-content-between.mb-4
+        h3.h3.mb-0.text-gray-800 Gyms | #{user.firstName}
+    table.table.table-hover
+        tbody
+            tr
+            th(scope='row') Name
+            td #{gym.name}
+            tr
+            th(scope='row') Location
+            td #{gym.gymLocation}
+            tr
+            th(scope='row') Average Price:
+            td #{gym.price}
+            tr
+            th(scope='row') Summary:
+            td #{gym.summary}
+            tr
+            th(scope='row') Featured Photo:
+            td #{gym.photo}

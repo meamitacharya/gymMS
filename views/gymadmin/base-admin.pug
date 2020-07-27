@@ -16,26 +16,44 @@ head
     //sidebar
     block sideBar
         include ../widgets/_sideBar
-
     // Content Wrapper
     #content-wrapper.d-flex.flex-column
         // Main Content
         #content
-
-            // Topbar
-            block topBar
+            block TopBar
                 include _topBarAdmin
+
+            .container-fluid
+                block Cards
+                    include _cards
 
                 // Begin Page Content
                 block MainContent
+                    .row
+                        .col-xl-8.col-lg-7
+                            .card.shadow.mb-4
+                                .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+                                    h6.m-0.font-weight-bold.text-primary Earnings Overview
+                                .card-body
+                                    .chart-area
+                                        canvas#myAreaChart
+                        // Pie Chart
+                        .col-xl-4.col-lg-5
+                            .card.shadow.mb-4
+                                .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+                                    h6.m-0.font-weight-bold.text-primary Revenue Sources
+                                .card-body
+                                    .chart-pie.pt-4.pb-2
+                                        canvas#myPieChart
 
 
-                // /.container-fluid
-                // End of Main Content
-                // Footer
-                block footer
-                    // End of Footer
-                    // End of Content Wrapper
+                        // End of Main Content
+
+        // Footer
+        block Footer
+            include ../widgets/_footer
+            // End of Footer
+            // End of Content Wrapper
 // End of Page Wrapper
 // Scroll to Top Button
 a.scroll-to-top.rounded(href='#page-top')
@@ -52,10 +70,12 @@ if user
 script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
 script(src='/template/vendor/jquery/jquery.min.js')
 script(src='/template/vendor/bootstrap/js/bootstrap.bundle.min.js')
-// Core plugin JavaScript
 script(src='/template/vendor/jquery-easing/jquery.easing.min.js')
-// Custom scripts for all pages
 script(src='/template/js/sb-admin-2.min.js')
+//- script(src='/template/vendor/chart.js/Chart.min.js')
+//- script(src='/template/js/demo/chart-pie-demo.js')
+//- script(src='/template/js/demo/chart-area-demo.js')
+
 
 
 

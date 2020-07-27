@@ -11,8 +11,8 @@ const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
-const { activate } = require('./controller/authController');
 const userRouter = require('./routes/userRoutes');
+const gymrouter = require('./routes/gymRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -68,8 +68,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/', viewRouter);
-app.get('/activate/:token', activate);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/gyms', gymrouter);
 
 //Handling unhandled routes
 app.all('*', (req, res, next) => {
