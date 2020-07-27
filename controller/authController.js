@@ -64,7 +64,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   // Sending Email to Registered User
   await sendmail(newUser, message, next);
 
-  newUser.password = undefined;
+  // newUser.password = undefined;
   res.status(201).json({
     status: 'sucess',
     data: {

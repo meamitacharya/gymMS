@@ -1,0 +1,52 @@
+extends base-admin
+
+block MainContent
+    #deleteModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#exampleModalLabel.modal-title Are you sure you want to delete?
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body Select &quot;Delete&quot; below if you want to delete Gym
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
+                    button.deleteButton.btn.btn-danger Delete
+
+
+    .d-sm-flex.align-items-center.justify-content-between.mb-4
+        h3.h3.mb-0.text-gray-800 Gyms | #{user.firstName}
+        .col-sm-3
+            a.btn.btn-user.btn-facebook.btn-block(href='/gymadmin/addGym')
+                | Add Gym
+    table.table.table-striped
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') Name
+                th(scope='col') Location
+                th(scope='col') Price
+                th(scope='col') Action
+        tbody
+        each gym, key in user.gyms
+            tr
+                th(scope='row') #{key + 1}
+                td(scope='col') #{gym.name}
+                td(scope='col') #{gym.gymLocation}
+                td(scope='col') #{gym.price}
+                td(scope='col')
+                    a(style='text-decoration: none' data-toggle='tooltip' data-placement='top' title='View Details' href=`gyms/${gym.slug}`)
+                        i.fas.fa-eye
+                            | &nbsp; &nbsp; &nbsp;
+                    a(style='text-decoration: none'  href=`gyms/edit/${gym.slug}` data-toggle='tooltip' data-placement='top' title='Edit Gym')
+                        i.fas.fa-edit
+                            | &nbsp; &nbsp; &nbsp;
+                            -var ram = 45
+                    a#gymValue(style='text-decoration: none' href=`#${gym.id}` data-value=`${gym.id}` data-toggle='modal' data-target='#deleteModal' title='Delete')
+                        i.fas.fa-trash 
+
+    script(type='module' src='/js/gym/deleteGym.js')
+
+
+
+

@@ -38,7 +38,7 @@ const sendErrDev = (err, req, res) => {
     });
   }
   // B) RENDERED WEBSITE
-  console.log(err.message);
+  console.log(err);
   return res.status(err.statusCode).render('error', {
     msg: err.message
   });

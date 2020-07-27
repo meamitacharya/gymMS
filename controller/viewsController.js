@@ -4,12 +4,6 @@ exports.getHomePage = (req, res) => {
   });
 };
 
-exports.getGymAdminDashboard = (req, res) => {
-  res.status(200).render('gymadmin/base-admin', {
-    title: 'Gymaholic | Gym Admin Dashboard'
-  });
-};
-
 exports.getLogin = (req, res) => {
   res.status(200).render('login', {
     title: 'Gymaholic | Login Page'

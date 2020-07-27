@@ -11,7 +11,7 @@ nav#page-top.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.s
             li.nav-item.dropdown.no-arrow
                 a#userDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                     span.mr-2.d-none.d-lg-inline.text-gray-600.small= user.firstName + ' ' + user.lastName
-                    img.img-profile.rounded-circle(src='https://source.unsplash.com/bSpqe48INMg/60x60')
+                    img.img-profile.rounded-circle(src=`/img/users/${user.photo}`)
                 // Dropdown - User Information
                 .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
                     a.dropdown-item(href='/profile')
